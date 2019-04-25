@@ -17,26 +17,34 @@ import {
 import FaArrowUp from 'react-icons/lib/fa/arrow-up'
 import FaArrowDown from 'react-icons/lib/fa/arrow-down'
 import FaComment from 'react-icons/lib/fa/comment'
+import Moment from 'react-moment';
+import { upVote, downVote } from '../actions/posts'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux'
+
 
 const Post = props => {
+  let { author, content, id, title, createdAt, votes, img_url} = props.post
+
   return (
+    
     <Row className="mt-3">
       <Col>
         <Card>
           <CardImg
             top
             width="100%"
-            src="https://images.pexels.com/photos/160107/pexels-photo-160107.jpeg?w=940&h=650&dpr=2&auto=compress&cs=tinysrgb"
+            src={img_url}
             alt="Card image cap"
           />
           <CardBody>
-            <CardTitle>Post Title | <FaArrowUp /> 1 <FaArrowDown /></CardTitle>
-            <CardSubtitle>Post Author</CardSubtitle>
+            <CardTitle>{title} | <FaArrowUp onClick={(e) => props.upVote(id)}/> {votes} <FaArrowDown onClick={(e) => props.downVote(id, votes)}/></CardTitle>
+            <CardSubtitle>{author}</CardSubtitle>
             <CardText>
-              Post Body
+              {content}
             </CardText>
               <hr />
-              a few seconds ago | <FaComment /> 2 Comments
+            <Moment format="MM-DD-YYYY">{createdAt}</Moment> | <FaComment /> 2 Comments
               <Form inline>
                 <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                   <Input type="text" name="comment" id="comment-field" placeholder="Enter a comment here" />
@@ -54,4 +62,10 @@ const Post = props => {
   )
 }
 
-export default Post
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({
+    upVote,
+    downVote
+  }, dispatch)
+
+export default connect(null, mapDispatchToProps)(Post)
