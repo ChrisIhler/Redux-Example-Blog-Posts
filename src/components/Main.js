@@ -12,7 +12,6 @@ class Main extends Component {
     super(props)
     this.state = {
       toggleNewPost: false,
-      filterPosts: this.props.posts.posts,
       search: ''
     }
   }
@@ -26,22 +25,27 @@ class Main extends Component {
     this.setState({ toggleNewPost: !toggle})
   }
 
-  filter = async (str) => {
+  filter =  (str) => {
     // if (str) {
     //   return this.setState({filterPosts: this.props.posts.posts}),console.log('POSTS 123',this.state.filterPosts)
     // }
-    await this.setState({search: str})
+    this.setState({search: str})
     // console.log(this.state.search)
-    const search = this.state.search.toLowerCase()
-    // console.log('search',search)
-    function filteredBySearch(post, search) {
-      const title = post.title.toLowerCase()
-      // console.log(title)
-      if (title.includes(search)) return post
-    }
-    const filtered = this.props.posts.posts.filter(function(post) { return filteredBySearch(post,search)  } )
-    await this.setState({filterPosts: filtered})
-    console.log('filtered posts',this.state.filterPosts)
+    // const search = this.state.search.toLowerCase()
+    // // console.log('search',search)
+    // function filteredBySearch(post, search) {
+    //   const title = post.title.toLowerCase()
+    //   // console.log(title)
+    //   if (title.includes(search)) return post
+    // }
+    // const filtered = this.props.posts.posts.filter(function(post) { return filteredBySearch(post,search)  } )
+    // await this.setState({filterPosts: filtered})
+    // console.log('filtered posts',this.state.filterPosts)
+  }
+
+  bySearchBox = (post) => {
+    // if (this.state.search.length === 0) return true
+    return post.title.toLowerCase().includes(this.state.search.toLowerCase())
   }
 
   render() {
@@ -75,7 +79,7 @@ class Main extends Component {
               return <Post key={post.id} post={post}/>
             }) : null} */}
 
-            {this.props.posts.posts ? this.props.posts.posts.map( post=> { 
+            {this.props.posts.posts ? this.props.posts.posts.filter(this.bySearchBox).map( post=> { 
               return <Post key={post.id} post={post}/>
             }) : null}
 

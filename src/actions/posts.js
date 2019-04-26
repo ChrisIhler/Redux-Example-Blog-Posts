@@ -71,7 +71,7 @@ export function upVote(id){
 }
 
 export function downVote(id, votes){
-  // if (votes === 0) return console.log(null)
+  if (votes === 0) return {type: 'down vote'}
   return async (dispatch) => {
     const response = await fetch(`http://localhost:8082/api/posts/votes/decrease/${id}`)
     const json = await response.json()
