@@ -26,25 +26,10 @@ class Main extends Component {
   }
 
   filter =  (str) => {
-    // if (str) {
-    //   return this.setState({filterPosts: this.props.posts.posts}),console.log('POSTS 123',this.state.filterPosts)
-    // }
     this.setState({search: str})
-    // console.log(this.state.search)
-    // const search = this.state.search.toLowerCase()
-    // // console.log('search',search)
-    // function filteredBySearch(post, search) {
-    //   const title = post.title.toLowerCase()
-    //   // console.log(title)
-    //   if (title.includes(search)) return post
-    // }
-    // const filtered = this.props.posts.posts.filter(function(post) { return filteredBySearch(post,search)  } )
-    // await this.setState({filterPosts: filtered})
-    // console.log('filtered posts',this.state.filterPosts)
   }
 
   bySearchBox = (post) => {
-    // if (this.state.search.length === 0) return true
     return post.title.toLowerCase().includes(this.state.search.toLowerCase())
   }
 
@@ -66,24 +51,9 @@ class Main extends Component {
         </Row>
         <Row>
           <Col className="pr-0" sm={{size: 9, offset: 1}}>
-
-            {console.log('props displayed',this.props.posts.posts,this.state.filterPosts)}
-
-              {/* {this.state.filterPosts ? this.state.filterPosts.map( post=> { 
-                return <Post key={post.id} post={post}/>
-              }) : null} */}
-
-            {/* I am having problems transitionaing between the filtered search posts and the redux posts. It 
-            seems if I try to use the filterPosts I can't get the full posts to populate initially.  */}
-            {/* {this.props.posts.posts ? this.state.filterPosts.map( post=> { 
-              return <Post key={post.id} post={post}/>
-            }) : null} */}
-
             {this.props.posts.posts ? this.props.posts.posts.filter(this.bySearchBox).map( post=> { 
               return <Post key={post.id} post={post}/>
             }) : null}
-
-
           </Col>
         </Row>
       </Container>

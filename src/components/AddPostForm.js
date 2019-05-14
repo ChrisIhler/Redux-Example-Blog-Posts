@@ -32,7 +32,6 @@ class AddPostForm extends Component {
           <Form onSubmit={this.onSubmit}>
             <FormGroup>
               <Label for="title-field">Title</Label>
-              {/* <Input onChange={ (e) => console.log(e.target.value )} type="text" name="title" id="title-field" /> */}
               <Input onChange={ (e) => this.setState({title: e.target.value})} type="text" name="title" id="title-field" />
             </FormGroup>
             <FormGroup>

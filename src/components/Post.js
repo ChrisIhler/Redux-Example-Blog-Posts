@@ -36,7 +36,6 @@ class Post extends Component {
   getCommentsByPostId = (comments, id) => {
     const filteredCommentsById = comments.filter(comment => comment.post_id === id)
     const renderComments = filteredCommentsById.map(comment => <li key={comment.id}>{comment.content}</li>)
-    // this.setState({numberOfComments: renderComments.length})
     return renderComments
   }
   
@@ -50,7 +49,6 @@ class Post extends Component {
 
   onChangeComment = async(str) => {
     await this.setState({addComment: str})
-    console.log(this.state.addComment)
   }
   render() {
 

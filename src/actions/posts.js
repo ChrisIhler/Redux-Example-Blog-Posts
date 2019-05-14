@@ -2,7 +2,7 @@ export const POSTS_RECEIVED = 'POSTS_RECEIVED'
 
 export function getPosts() {
   return async (dispatch) => {
-    const response = await fetch('http://localhost:8082/api/posts')
+    const response = await fetch('https://boiling-lowlands-50769.herokuapp.com/api/posts')
     const json = await response.json()
     console.log('getPosts', json)
     const postsByVotes = json.sort(function(a,b){
@@ -19,7 +19,7 @@ export function getPosts() {
 export function createPost(post){
   let {title, body, author, image} = post
   return (dispatch) => {
-    fetch('http://localhost:8082/api/posts', {
+    fetch('https://boiling-lowlands-50769.herokuapp.com/api/posts', {
       method: 'POST',
       headers: {
         'Accept': 'application/json, text/plain, */*',
@@ -40,30 +40,9 @@ export function createPost(post){
   }
 }
 
-// export const postRequest = function (requestUserID, requestDescription){
-//   return dispatch => {
-//     request(`/requests/${requestUserID}`, 'post', {
-//       description: requestDescription
-//     }).then( response => {
-//       dispatch(getCurrentRequestByRequesterUserID(requestUserID))
-//       console.log('THE REQUEST INFOMATION',response.data)
-//     })
-//   }
-// }
-
-
-// export function upVote(id){
-//   return (dispatch) => {
-//     fetch(`/posts/votes/increase/${id}`)
-//     .then(response => {
-//       console.log('up vote',response)
-//     })
-//   }
-// }
-
 export function upVote(id){
   return async (dispatch) => {
-    const response = await fetch(`http://localhost:8082/api/posts/votes/increase/${id}`)
+    const response = await fetch(`https://boiling-lowlands-50769.herokuapp.com/api/posts/votes/increase/${id}`)
     const json = await response.json()
     console.log('up vote', json)
     dispatch(getPosts())
@@ -73,7 +52,7 @@ export function upVote(id){
 export function downVote(id, votes){
   if (votes === 0) return {type: 'down vote'}
   return async (dispatch) => {
-    const response = await fetch(`http://localhost:8082/api/posts/votes/decrease/${id}`)
+    const response = await fetch(`https://boiling-lowlands-50769.herokuapp.com/api/posts/votes/decrease/${id}`)
     const json = await response.json()
     console.log('up vote', json)
     dispatch(getPosts())
