@@ -2,7 +2,7 @@ export const COMMENTS_RECEIVED = 'COMMENTS_RECEIVED'
 
 export function getComments() {
   return async (dispatch) => {
-    const response = await fetch('https://boiling-lowlands-50769.herokuapp.com/api/comments')
+    const response = await fetch('https://blooming-springs-92699.herokuapp.com/api/comments')
     const json = await response.json()
     console.log('getComments', json)
     dispatch({
@@ -14,7 +14,7 @@ export function getComments() {
 
 export function createComment(content, postId){
   return (dispatch) => {
-    fetch('https://boiling-lowlands-50769.herokuapp.com/api/comments', {
+    fetch('https://https://blooming-springs-92699.herokuapp.com/api/comments', {
       method: 'POST',
       headers: {
         'Accept': 'application/json, text/plain, */*',
